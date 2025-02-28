@@ -18,11 +18,6 @@ function App() {
   const DEFAULT_BANG = localStorage.getItem("default-bang") ?? "g";
   const defaultBang = bangs.find((bang) => bang.t === DEFAULT_BANG)!;
 
-  /* 
- 1. regexp to get bang
- 2. regexp to get query
- */
-
   const match = query.match(/!(\S+)/gi) || [];
 
   const matchList = match
