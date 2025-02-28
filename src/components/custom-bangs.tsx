@@ -102,17 +102,18 @@ export function CustomBangs({
           <tr className="flex">
             <th className="text-left flex-1">Trigger</th>
             <th className="text-left flex-1">URL</th>
-            <th className="text-left flex-1">Remove</th>
+            <th className="text-right flex-1">Remove</th>
           </tr>
         </thead>
         <tbody>
           {customBangs.length > 0 ? (
             customBangs.map((bang: CustomBang) => (
-              <tr key={bang.t} className="flex">
+              <tr key={bang.t} className="flex items-center">
                 <td className="flex-1">{bang.t}</td>
                 <td className="flex-1">{bang.u}</td>
-                <td className="flex-1">
+                <td className="flex-1 text-right">
                   <button
+                    className="bg-red-500 p-2 rounded-md text-white cursor-pointer"
                     onClick={() => {
                       removeCustomBang(bang.t);
                       setCustomBangs(getCustomBangs());
