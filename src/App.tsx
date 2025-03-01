@@ -30,7 +30,7 @@ function App() {
 
   if (!query) {
     return (
-      <main className="flex flex-col items-center justify-center h-screen container mx-auto space-y-4">
+      <main className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
         <h1 className="text-2xl">
           You know `Unduck`? This's my implementation in React
         </h1>
@@ -63,7 +63,7 @@ function App() {
 
   if (!cleanQuery) {
     return (
-      <main className="flex flex-col items-center justify-center h-screen">
+      <main className="flex justify-center items-center min-h-screen bg-gradient-to-br from-neutral-50 to-neutral-100">
         <h1 className="text-4xl underline">
           No query provided, please provide a query
         </h1>
@@ -88,8 +88,7 @@ function App() {
   console.log({ searchUrls });
 
   searchUrls.forEach((url, index) => {
-    if (!url) return;
-    if (index === 0) {
+    if (index === searchUrls.length - 1) {
       window.location.href = url;
     } else {
       window.open(url, "_blank");
