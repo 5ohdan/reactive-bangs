@@ -46,13 +46,15 @@ function App() {
 
   const cleanQuery = query.replace(/!(\S+)/gi, "").trim();
 
-  if (!query) {
+  if (!query || !cleanQuery) {
     return (
       <main className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
         <h1 className="text-3xl font-bold">Und*ck-React</h1>
-        <h1 className="text-4xl font-bold mt-4 mb-6">
-          No query provided, please provide a query
-        </h1>
+        {!cleanQuery && (
+          <h1 className="text-4xl font-bold mt-4">
+            No query provided, please provide a query
+          </h1>
+        )}
         <CustomBangs checkBangExists={checkBangExists} />
       </main>
     );
@@ -85,16 +87,6 @@ function App() {
       }
     }
   });
-
-  return (
-    <main className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
-      <h1 className="text-3xl font-bold">Und*ck-React</h1>
-      <h1 className="text-4xl font-bold mt-4">
-        Could not process your query. Please try again.
-      </h1>
-      <CustomBangs checkBangExists={checkBangExists} />
-    </main>
-  );
 }
 
 export default App;
