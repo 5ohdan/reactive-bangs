@@ -5,7 +5,6 @@ import {
   getCustomBangs,
 } from "./components/custom-bangs";
 
-// Interface for built-in bangs
 interface Bang {
   t: string;
   u: string;
@@ -28,17 +27,6 @@ function App() {
   const url = new URL(window.location.href);
   const query = url.searchParams.get("q")?.trim() ?? "";
 
-  if (!query) {
-    return (
-      <main className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
-        <h1 className="text-2xl">
-          You know `Unduck`? This's my implementation in React
-        </h1>
-        <CustomBangs checkBangExists={checkBangExists} />
-      </main>
-    );
-  }
-
   const MAX_BANGS = 3;
   const DEFAULT_BANG = localStorage.getItem("default-bang") ?? "g";
   const defaultBang = bangs.find((bang) => bang.t === DEFAULT_BANG)!;
@@ -49,51 +37,64 @@ function App() {
     .slice(0, MAX_BANGS)
     .map((bang: string) => bang.toLowerCase().replace("!", ""))
     .map((bang: string) => {
-      // First check if it's a custom bang
       const customBang = customBangs.find((b: CustomBang) => b.t === bang);
       if (customBang) return customBang;
 
-      // If not, check if it's a built-in bang
       const builtInBang = bangs.find((b) => b.t === bang);
-      // Return the built-in bang as is (it doesn't have the c property)
       return builtInBang;
     });
 
   const cleanQuery = query.replace(/!(\S+)/gi, "").trim();
 
-  if (!cleanQuery) {
+  if (!query) {
     return (
-      <main className="flex justify-center items-center min-h-screen bg-gradient-to-br from-neutral-50 to-neutral-100">
-        <h1 className="text-4xl underline">
+      <main className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+        <h1 className="text-3xl font-bold">Und*ck-React</h1>
+        <h1 className="text-4xl font-bold mt-4 mb-6">
           No query provided, please provide a query
         </h1>
+        <CustomBangs checkBangExists={checkBangExists} />
       </main>
     );
   }
 
   if (matchList.length === 0) {
-    window.location.href = searchUrl(defaultBang.t, cleanQuery)!;
+    const defaultSearchUrl = searchUrl(defaultBang.t, cleanQuery);
+    if (defaultSearchUrl) {
+      window.location.href = defaultSearchUrl;
+      return null;
+    }
   }
 
-  console.log({ matchList });
+  const searchUrls = matchList
+    .map((bang: Bang | CustomBang | undefined) => {
+      if (!bang) return null;
 
-  const searchUrls = matchList.map((bang: Bang | CustomBang | undefined) => {
-    if (!bang) return null;
-
-    return "custom" in bang && bang.custom === true
-      ? searchCustomBang(bang.t, cleanQuery)
-      : searchUrl(bang.t, cleanQuery);
-  });
-
-  console.log({ searchUrls });
+      return "custom" in bang && bang.custom === true
+        ? searchCustomBang(bang.t, cleanQuery)
+        : searchUrl(bang.t, cleanQuery);
+    })
+    .filter(Boolean);
 
   searchUrls.forEach((url, index) => {
-    if (index === searchUrls.length - 1) {
-      window.location.href = url;
-    } else {
-      window.open(url, "_blank");
+    if (url) {
+      if (index === searchUrls.length - 1) {
+        window.location.href = url;
+      } else {
+        window.open(url, "_blank");
+      }
     }
   });
+
+  return (
+    <main className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+      <h1 className="text-3xl font-bold">Und*ck-React</h1>
+      <h1 className="text-4xl font-bold mt-4">
+        Could not process your query. Please try again.
+      </h1>
+      <CustomBangs checkBangExists={checkBangExists} />
+    </main>
+  );
 }
 
 export default App;
