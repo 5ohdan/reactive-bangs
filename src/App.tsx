@@ -4,6 +4,7 @@ import {
   CustomBangs,
   getCustomBangs,
 } from "./components/custom-bangs";
+import { SearchForm } from "./components/search-form";
 
 interface Bang {
   t: string;
@@ -55,7 +56,10 @@ function App() {
             No query provided, please provide a query
           </h1>
         )}
-        <CustomBangs checkBangExists={checkBangExists} />
+        <div className="mx-auto w-full max-w-2xl pt-4">
+          <SearchForm />
+          <CustomBangs checkBangExists={checkBangExists} />
+        </div>
       </main>
     );
   }
