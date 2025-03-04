@@ -64,14 +64,6 @@ function App() {
     );
   }
 
-  if (matchList.length === 0) {
-    const defaultSearchUrl = searchUrl(defaultBang.t, cleanQuery);
-    if (defaultSearchUrl) {
-      window.location.href = defaultSearchUrl;
-      return null;
-    }
-  }
-
   const searchUrls = matchList
     .map((bang: Bang | CustomBang | undefined) => {
       if (!bang) return null;
@@ -81,6 +73,14 @@ function App() {
         : searchUrl(bang.t, cleanQuery);
     })
     .filter(Boolean);
+
+  if (matchList.length === 0 || searchUrls.length === 0) {
+    const defaultSearchUrl = searchUrl(defaultBang.t, cleanQuery);
+    if (defaultSearchUrl) {
+      window.location.href = defaultSearchUrl;
+      return null;
+    }
+  }
 
   searchUrls.forEach((url, index) => {
     if (url) {
