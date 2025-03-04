@@ -1,10 +1,7 @@
 import { bangs } from "./bang.ts";
-import {
-  type CustomBang,
-  CustomBangs,
-  getCustomBangs,
-} from "./components/custom-bangs";
+import { type CustomBang, CustomBangs } from "./components/custom-bangs";
 import { SearchForm } from "./components/search-form";
+import { getCustomBangs } from "./helpers";
 
 interface Bang {
   t: string;
@@ -49,18 +46,21 @@ function App() {
 
   if (!query || !cleanQuery) {
     return (
-      <main className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
-        <h1 className="text-3xl font-bold">Und*ck-React</h1>
-        {!cleanQuery && (
-          <h1 className="text-4xl font-bold mt-4">
-            No query provided, please provide a query
-          </h1>
-        )}
-        <div className="mx-auto w-full max-w-2xl pt-4">
-          <SearchForm />
-          <CustomBangs checkBangExists={checkBangExists} />
-        </div>
-      </main>
+      <>
+        <CustomBangs checkBangExists={checkBangExists} />
+
+        <main className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+          <h1 className="text-3xl font-bold">Und*ck-React</h1>
+          {query && !cleanQuery && (
+            <h1 className="text-4xl font-bold mt-4">
+              No query provided, please provide a query
+            </h1>
+          )}
+          <div className="mx-auto w-full max-w-2xl pt-4">
+            <SearchForm />
+          </div>
+        </main>
+      </>
     );
   }
 
@@ -91,6 +91,12 @@ function App() {
       }
     }
   });
+
+  return (
+    <>
+      <CustomBangs checkBangExists={checkBangExists} />
+    </>
+  );
 }
 
 export default App;
