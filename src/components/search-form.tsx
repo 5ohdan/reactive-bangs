@@ -16,16 +16,17 @@ export function SearchForm() {
   };
 
   return (
-    <form className="flex gap-2 w-full py-2" onSubmit={handleSubmit}>
+    <form className="group m-2 flex w-full" onSubmit={handleSubmit}>
       <input
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         type="text"
-        className="flex-1 rounded-md p-2 border-2 border-neutral-200"
+        className="flex-1 rounded-l-md border-2 border-r-0 border-teal-800/90 bg-teal-950/50 p-3 text-teal-50 group-hover:border-teal-900/90 group-active:border-teal-950/90 placeholder:italic hover:text-teal-100/90 focus-visible:outline-hidden active:text-teal-200/90"
+        placeholder="Search for everything..."
       />
       <button
         type="submit"
-        className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md"
+        className="cursor-pointer rounded-r-md bg-teal-800/90 px-4 py-2 text-lg text-teal-50 transition-colors group-hover:bg-teal-900/90 group-active:bg-teal-950/90 hover:text-teal-200/90 active:text-teal-200/90"
       >
         Search
       </button>

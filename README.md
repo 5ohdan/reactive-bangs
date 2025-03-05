@@ -1,1 +1,1 @@
-## React implementation of Theo's `Unduck` with multiple bangs supported
+## DDG's Bangs in React, inspired by Theo's "Und\*ck"

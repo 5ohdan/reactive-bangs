@@ -12,9 +12,8 @@ export function CustomBangs({
 }: {
   checkBangExists: (trigger: string) => boolean;
 }) {
-  const [customBangs, setCustomBangs] = useState<CustomBang[]>(
-    getCustomBangs()
-  );
+  const [customBangs, setCustomBangs] =
+    useState<CustomBang[]>(getCustomBangs());
 
   const [isOpen, setIsOpen] = useState(false);
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -103,7 +102,7 @@ export function CustomBangs({
     <>
       <div className="fixed top-4 right-4 z-50">
         <button
-          className="flex items-center justify-center h-10 px-4 font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors shadow-sm"
+          className="focus:ring-opacity-20 flex h-10 items-center justify-center rounded-md bg-teal-950/90 px-4 font-medium text-teal-100 shadow-sm transition-colors hover:bg-teal-800/90 hover:text-teal-200 focus:ring-2 focus:ring-teal-800 focus:outline-none"
           onClick={() => setIsOpen(true)}
         >
           Custom Shortcuts
@@ -112,78 +111,78 @@ export function CustomBangs({
 
       <dialog
         ref={dialogRef}
-        className="fixed m-0 p-0 inset-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-lg overflow-visible max-h-[85vh] w-full max-w-[95vw] md:max-w-3xl border-none"
+        className="fixed inset-0 top-1/2 left-1/2 m-0 max-h-[85vh] w-full max-w-[95vw] -translate-x-1/2 -translate-y-1/2 overflow-visible rounded-lg border-none bg-gray-900 p-0 shadow-lg md:max-w-3xl"
         onCancel={() => setIsOpen(false)}
       >
         <button
-          className="absolute top-3 right-3 flex items-center justify-center w-8 h-8 rounded-md bg-blue-500 hover:bg-blue-600 text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all transform hover:scale-105"
+          className="focus:ring-opacity-50 absolute top-3 right-3 flex h-8 w-8 transform items-center justify-center rounded-md bg-teal-600 text-white shadow-sm transition-all hover:scale-105 hover:bg-teal-700 focus:ring-2 focus:ring-teal-400 focus:outline-none"
           onClick={() => setIsOpen(false)}
           aria-label="Close"
         >
           X
         </button>
-        <div className="pt-6 px-6 pb-4 border-neutral-200">
-          <div className="text-center text-neutral-600">
+        <div className="border-gray-700 px-6 pt-6 pb-4">
+          <div className="text-center text-gray-300">
             <p className="mb-2">
               Create custom shortcuts to quickly access your favorite websites.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm mx-auto">
-              <div className="bg-neutral-100 p-3 rounded-md">
+            <div className="mx-auto grid grid-cols-1 gap-2 text-sm md:grid-cols-2">
+              <div className="rounded-md bg-gray-800 p-3">
                 <span className="font-semibold">Trigger:</span> A short keyword
                 you&apos;ll type to activate the shortcut (e.g., &quot;yt&quot;
                 for YouTube)
               </div>
-              <div className="bg-neutral-100 p-3 rounded-md">
+              <div className="rounded-md bg-gray-800 p-3">
                 <span className="font-semibold">URL:</span> The destination with
                 optional placeholders like {"{{{s}}}"} for search terms
               </div>
             </div>
           </div>
         </div>
-        <div className="px-6 pb-6 space-y-6 overflow-visible">
+        <div className="space-y-6 overflow-visible px-6 pb-6">
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 overflow-visible">
+            <div className="grid grid-cols-1 gap-4 overflow-visible md:grid-cols-2">
               <input
                 type="text"
                 placeholder="Enter a short keyword (e.g., 'yt', 'maps')"
                 value={trigger}
                 onChange={(e) => setTrigger(e.target.value)}
-                className="w-full py-3 px-4 rounded-md border border-neutral-200 bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 text-neutral-900"
+                className="w-full rounded-md border border-gray-700 bg-gray-800 px-4 py-3 text-white focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:outline-none"
               />
               <input
                 type="text"
                 placeholder="Enter URL with optional {{{s}}} for search terms"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
-                className="w-full py-3 px-4 rounded-md border border-neutral-200 bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 text-neutral-900"
+                className="w-full rounded-md border border-gray-700 bg-gray-800 px-4 py-3 text-white focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:outline-none"
               />
             </div>
             <button
               type="submit"
               disabled={!trigger.trim() || !url.trim().includes("{{{s}}}")}
-              className="w-full h-12 flex items-center justify-center gap-2 bg-blue-500 hover:bg-blue-600 disabled:bg-neutral-200 disabled:cursor-not-allowed text-white rounded-md font-medium transition-colors"
+              className="flex h-12 w-full items-center justify-center gap-2 rounded-md bg-teal-600 font-medium text-white transition-colors hover:bg-teal-700 disabled:cursor-not-allowed disabled:bg-gray-600"
             >
               Add
             </button>
-            <p className="text-sm text-neutral-500 italic">
+            <p className="text-sm text-gray-400 italic">
               Example: Trigger &quot;yt&quot; with URL
               &quot;https://youtube.com/results?search_query={"{{{s}}}"}&quot;
               will let you search YouTube directly.
             </p>
           </form>
 
-          <div className="border border-neutral-200 rounded-md overflow-hidden">
-            <div className="h-64 overflow-y-auto overflow-x-hidden">
+          <div className="overflow-hidden rounded-md border border-gray-700">
+            <div className="h-64 overflow-x-hidden overflow-y-auto">
               <table className="w-full border-collapse">
-                <thead className="bg-neutral-50 sticky top-0 z-10">
+                <thead className="sticky top-0 z-10 bg-gray-800">
                   <tr>
-                    <th className="text-left p-4 font-semibold w-1/3 text-neutral-900">
+                    <th className="w-1/3 p-4 text-left font-semibold text-white">
                       Trigger
                     </th>
-                    <th className="text-left p-4 font-semibold text-neutral-900">
+                    <th className="p-4 text-left font-semibold text-white">
                       URL
                     </th>
-                    <th className="w-24 p-4 text-right font-semibold text-neutral-900">
+                    <th className="w-24 p-4 text-right font-semibold text-white">
                       Remove
                     </th>
                   </tr>
@@ -193,30 +192,26 @@ export function CustomBangs({
                     customBangs.map((bang) => (
                       <tr
                         key={bang.t}
-                        className="border-t border-neutral-200 hover:bg-neutral-50"
+                        className="border-t border-gray-700 hover:bg-gray-800"
                       >
-                        <td className="p-4 font-medium text-neutral-900">
-                          {bang.t}
-                        </td>
-                        <td className="p-4 font-mono text-sm text-neutral-900 truncate max-w-[250px]">
+                        <td className="p-4 font-medium text-white">{bang.t}</td>
+                        <td className="max-w-[250px] truncate p-4 font-mono text-sm text-white">
                           {bang.u}
                         </td>
                         <td className="p-4 text-right">
                           <button
-                            onClick={() => {
-                              removeCustomBang(bang.t);
-                              setCustomBangs(getCustomBangs());
-                            }}
-                            className="size-10 p-2 text-red-500 hover:text-red-600 hover:bg-red-100 bg-red-50 rounded-md transition-colors"
+                            onClick={() => removeCustomBang(bang.t)}
+                            className="text-red-500 transition-colors hover:text-red-400"
+                            aria-label={`Remove ${bang.t}`}
                           >
-                            X
+                            Remove
                           </button>
                         </td>
                       </tr>
                     ))
                   ) : (
-                    <tr>
-                      <td colSpan={3} className="p-4 text-center">
+                    <tr className="border-t border-gray-700">
+                      <td colSpan={3} className="p-4 text-center text-gray-400">
                         No custom shortcuts yet
                       </td>
                     </tr>
@@ -225,11 +220,11 @@ export function CustomBangs({
               </table>
             </div>
           </div>
-          <div className="p-4 bg-neutral-50 rounded-md border border-dashed border-neutral-200">
-            <h3 className="font-medium mb-2 flex items-center gap-1 text-neutral-900">
+          <div className="rounded-md border border-dashed border-gray-700 bg-gray-800 p-4">
+            <h3 className="mb-2 flex items-center gap-1 font-medium text-white">
               How it works
             </h3>
-            <div className="space-y-2 text-sm text-neutral-600">
+            <div className="space-y-2 text-sm text-gray-300">
               <p>
                 1. Add a trigger and URL above (e.g., &quot;g&quot; and
                 &quot;https://google.com/search?q={"{{{s}}}"}&quot;)

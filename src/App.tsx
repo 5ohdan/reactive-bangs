@@ -49,10 +49,12 @@ function App() {
       <>
         <CustomBangs checkBangExists={checkBangExists} />
 
-        <main className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
-          <h1 className="text-3xl font-bold">Und*ck-React</h1>
+        <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800 transition-colors duration-200">
+          <h1 className="text-6xl font-semibold text-white">
+            Bang <span className="font-medium italic">it</span> out
+          </h1>
           {query && !cleanQuery && (
-            <h1 className="text-4xl font-bold mt-4">
+            <h1 className="mt-4 text-3xl font-light text-gray-200/70 decoration-2 hover:underline hover:underline-offset-2">
               No query provided, please provide a query
             </h1>
           )}

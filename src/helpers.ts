@@ -19,7 +19,7 @@ const removeCustomBang = (trigger: string) => {
   const customBangs = getCustomBangs();
   customBangs.splice(
     customBangs.findIndex((bang: CustomBang) => bang.t === trigger),
-    1
+    1,
   );
   localStorage.setItem(CUSTOM_BANGS, JSON.stringify(customBangs));
 };
