@@ -123,9 +123,7 @@ export function CustomBangs({
         </button>
         <div className="border-gray-700 px-6 pt-6 pb-4">
           <div className="text-center text-gray-300">
-            <p className="mb-2">
-              Create custom shortcuts to quickly access your favorite websites.
-            </p>
+            <h2 className="text-lg font-medium">Create custom shortcuts</h2>
             <div className="mx-auto grid grid-cols-1 gap-2 text-sm md:grid-cols-2">
               <div className="rounded-md bg-gray-800 p-3">
                 <span className="font-semibold">Trigger:</span> A short keyword
