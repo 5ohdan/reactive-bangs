@@ -47,10 +47,9 @@ function App() {
   if (!query || !cleanQuery) {
     return (
       <>
-        <CustomBangs checkBangExists={checkBangExists} />
-
-        <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-neutral-950 to-neutral-800 transition-colors duration-200">
-          <h1 className="text-6xl font-semibold text-teal-50 font-stretch-condensed">
+        <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-neutral-950 to-neutral-800/70 transition-colors duration-200">
+          <CustomBangs checkBangExists={checkBangExists} />
+          <h1 className="line text-6xl font-semibold text-teal-50 font-stretch-condensed">
             Bang
             <span className="rounded-lg bg-teal-100 font-medium text-teal-950 italic">
               {" "}
@@ -90,20 +89,17 @@ function App() {
   }
 
   searchUrls.forEach((url, index) => {
-    if (url) {
-      if (index === searchUrls.length - 1) {
+    if (!url) return;
+    if (index === searchUrls.length - 1) {
+      setTimeout(() => {
         window.location.href = url;
-      } else {
+      }, searchUrls.length * 100);
+    } else {
+      setTimeout(() => {
         window.open(url, "_blank");
-      }
+      }, index * 100);
     }
   });
-
-  return (
-    <>
-      <CustomBangs checkBangExists={checkBangExists} />
-    </>
-  );
 }
 
 export default App;

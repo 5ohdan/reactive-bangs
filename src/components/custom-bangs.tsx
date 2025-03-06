@@ -111,134 +111,179 @@ export function CustomBangs({
 
       <dialog
         ref={dialogRef}
-        className="fixed inset-0 top-1/2 left-1/2 m-0 max-h-[85vh] w-full max-w-[95vw] -translate-x-1/2 -translate-y-1/2 overflow-visible rounded-lg border-none bg-gray-900 p-0 shadow-lg md:max-w-3xl"
-        onCancel={() => setIsOpen(false)}
+        className="fixed top-1/2 left-1/2 w-full max-w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-lg border border-neutral-800 bg-neutral-900 p-0 text-neutral-100 shadow-xl backdrop:bg-black/50"
       >
-        <button
-          className="focus:ring-opacity-50 absolute top-3 right-3 flex h-8 w-8 transform items-center justify-center rounded-md bg-teal-600 text-white shadow-sm transition-all hover:scale-105 hover:bg-teal-700 focus:ring-2 focus:ring-teal-400 focus:outline-none"
-          onClick={() => setIsOpen(false)}
-          aria-label="Close"
-        >
-          X
-        </button>
-        <div className="border-gray-700 px-6 pt-6 pb-4">
-          <div className="text-center text-gray-300">
-            <h2 className="text-lg font-medium">Create custom shortcuts</h2>
-            <div className="mx-auto grid grid-cols-1 gap-2 text-sm md:grid-cols-2">
-              <div className="rounded-md bg-gray-800 p-3">
-                <span className="font-semibold">Trigger:</span> A short keyword
-                you&apos;ll type to activate the shortcut (e.g., &quot;yt&quot;
-                for YouTube)
-              </div>
-              <div className="rounded-md bg-gray-800 p-3">
-                <span className="font-semibold">URL:</span> The destination with
-                optional placeholders like {"{{{s}}}"} for search terms
-              </div>
-            </div>
-          </div>
+        <div className="flex items-center justify-between border-b border-neutral-800 px-6 py-4">
+          <h2 className="text-xl font-medium text-teal-300">
+            Create custom shortcuts
+          </h2>
+          <button
+            onClick={() => setIsOpen(false)}
+            className="flex h-8 w-8 items-center justify-center rounded-md hover:bg-neutral-800"
+          >
+            <span className="text-neutral-400">Close</span>
+          </button>
         </div>
-        <div className="space-y-6 overflow-visible px-6 pb-6">
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-1 gap-4 overflow-visible md:grid-cols-2">
+
+        <form onSubmit={handleSubmit} className="grid gap-6 p-6">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div className="space-y-2">
+              <div className="text-sm font-medium">
+                Trigger
+                <span className="ml-1 font-normal text-neutral-400">
+                  A short keyword you'll type to activate the shortcut
+                </span>
+              </div>
               <input
                 type="text"
                 placeholder="Enter a short keyword (e.g., 'yt', 'maps')"
                 value={trigger}
                 onChange={(e) => setTrigger(e.target.value)}
-                className="w-full rounded-md border border-gray-700 bg-gray-800 px-4 py-3 text-white focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:outline-none"
+                className="w-full rounded-md border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm placeholder:text-neutral-500 focus:border-teal-500/50 focus:ring-1 focus:ring-teal-500/30 focus:outline-none"
               />
+            </div>
+            <div className="space-y-2">
+              <div className="text-sm font-medium">
+                URL
+                <span className="ml-1 font-normal text-neutral-400">
+                  The destination with optional{" "}
+                  <span className="font-mono text-teal-300">{"{{s}}"}</span> for
+                  search terms
+                </span>
+              </div>
               <input
                 type="text"
-                placeholder="Enter URL with optional {{{s}}} for search terms"
+                placeholder="Enter URL with optional {{s}} for search terms"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
-                className="w-full rounded-md border border-gray-700 bg-gray-800 px-4 py-3 text-white focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:outline-none"
+                className="w-full rounded-md border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm placeholder:text-neutral-500 focus:border-teal-500/50 focus:ring-1 focus:ring-teal-500/30 focus:outline-none"
               />
             </div>
-            <button
-              type="submit"
-              disabled={!trigger.trim() || !url.trim().includes("{{{s}}}")}
-              className="flex h-12 w-full items-center justify-center gap-2 rounded-md bg-teal-600 font-medium text-white transition-colors hover:bg-teal-700 disabled:cursor-not-allowed disabled:bg-gray-600"
-            >
-              Add
-            </button>
-            <p className="text-sm text-gray-400 italic">
-              Example: Trigger &quot;yt&quot; with URL
-              &quot;https://youtube.com/results?search_query={"{{{s}}}"}&quot;
-              will let you search YouTube directly.
-            </p>
-          </form>
+          </div>
 
-          <div className="overflow-hidden rounded-md border border-gray-700">
-            <div className="h-64 overflow-x-hidden overflow-y-auto">
-              <table className="w-full border-collapse">
-                <thead className="sticky top-0 z-10 bg-gray-800">
+          <button
+            type="submit"
+            className="flex w-full items-center justify-center rounded-md bg-teal-500/20 px-4 py-2 text-sm font-medium text-teal-100 hover:bg-teal-500/30 focus:ring-2 focus:ring-teal-500/50 focus:ring-offset-2 focus:ring-offset-neutral-900 focus:outline-none disabled:opacity-50"
+          >
+            Add Shortcut
+          </button>
+
+          <div className="flex items-start gap-2 rounded-md bg-teal-500/10 p-3 text-xs text-neutral-300">
+            <div>
+              <span className="font-medium text-teal-200">Example:</span>{" "}
+              Trigger{" "}
+              <span className="rounded bg-neutral-800 px-1 font-mono">yt</span>{" "}
+              with URL{" "}
+              <span className="rounded bg-neutral-800 px-1 font-mono">
+                https://youtube.com/results?search_query={"{{s}}"}
+              </span>{" "}
+              will let you search YouTube directly.
+            </div>
+          </div>
+
+          <div className="overflow-hidden rounded-md border border-neutral-800">
+            <div className="border-b border-neutral-800 bg-neutral-800/50 px-6 py-3">
+              <h3 className="text-sm font-medium text-teal-200">
+                Your shortcuts
+              </h3>
+            </div>
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-neutral-800 bg-neutral-800/30">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-neutral-400">
+                    Trigger
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-neutral-400">
+                    URL
+                  </th>
+                  <th className="w-[80px] px-6 py-3 text-left text-xs font-medium text-neutral-400"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {customBangs.length === 0 ? (
                   <tr>
-                    <th className="w-1/3 p-4 text-left font-semibold text-white">
-                      Trigger
-                    </th>
-                    <th className="p-4 text-left font-semibold text-white">
-                      URL
-                    </th>
-                    <th className="w-24 p-4 text-right font-semibold text-white">
-                      Remove
-                    </th>
+                    <td
+                      colSpan={3}
+                      className="h-24 px-6 py-4 text-center text-neutral-400"
+                    >
+                      No custom shortcuts yet
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {customBangs.length > 0 ? (
-                    customBangs.map((bang) => (
-                      <tr
-                        key={bang.t}
-                        className="border-t border-gray-700 hover:bg-gray-800"
-                      >
-                        <td className="p-4 font-medium text-white">{bang.t}</td>
-                        <td className="max-w-[250px] truncate p-4 font-mono text-sm text-white">
-                          {bang.u}
-                        </td>
-                        <td className="p-4 text-right">
-                          <button
-                            onClick={() => removeCustomBang(bang.t)}
-                            className="text-red-500 transition-colors hover:text-red-400"
-                            aria-label={`Remove ${bang.t}`}
-                          >
-                            Remove
-                          </button>
-                        </td>
-                      </tr>
-                    ))
-                  ) : (
-                    <tr className="border-t border-gray-700">
-                      <td colSpan={3} className="p-4 text-center text-gray-400">
-                        No custom shortcuts yet
+                ) : (
+                  customBangs.map((customBang, index) => (
+                    <tr key={index} className="border-b border-neutral-800">
+                      <td className="px-6 py-3 text-sm font-medium text-teal-100">
+                        {customBang.t}
+                      </td>
+                      <td className="max-w-[300px] truncate px-6 py-3 font-mono text-xs">
+                        {customBang.u}
+                      </td>
+                      <td className="px-6 py-3">
+                        <button onClick={() => removeCustomBang(customBang.t)}>
+                          <span className="text-red-500">Remove</span>
+                        </button>
                       </td>
                     </tr>
-                  )}
-                </tbody>
-              </table>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="overflow-hidden rounded-md border border-neutral-800">
+            <div className="border-b border-neutral-800 bg-neutral-800/50 px-6 py-3">
+              <h3 className="text-sm font-medium text-teal-200">
+                How it works
+              </h3>
+            </div>
+            <div className="px-6 py-4">
+              <ol className="space-y-3 text-sm">
+                <li className="flex gap-2">
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-teal-500/20 text-xs font-medium text-teal-300">
+                    1
+                  </span>
+                  <span>
+                    Add a trigger and URL above (e.g.,{" "}
+                    <span className="rounded bg-neutral-800 px-1 font-mono">
+                      g
+                    </span>{" "}
+                    and{" "}
+                    <span className="rounded bg-neutral-800 px-1 font-mono">
+                      https://google.com/search?q={"{{s}}"}
+                    </span>
+                    )
+                  </span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-teal-500/20 text-xs font-medium text-teal-300">
+                    2
+                  </span>
+                  <span>
+                    When you type{" "}
+                    <span className="rounded bg-neutral-800 px-1 font-mono">
+                      g cats
+                    </span>{" "}
+                    in your browser's address bar, it redirects to{" "}
+                    <span className="rounded bg-neutral-800 px-1 font-mono">
+                      https://google.com/search?q=cats
+                    </span>
+                  </span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-teal-500/20 text-xs font-medium text-teal-300">
+                    3
+                  </span>
+                  <span>
+                    The{" "}
+                    <span className="font-mono text-teal-300">{"{{s}}"}</span>{" "}
+                    placeholder gets replaced with whatever you type after the
+                    trigger
+                  </span>
+                </li>
+              </ol>
             </div>
           </div>
-          <div className="rounded-md border border-dashed border-gray-700 bg-gray-800 p-4">
-            <h3 className="mb-2 flex items-center gap-1 font-medium text-white">
-              How it works
-            </h3>
-            <div className="space-y-2 text-sm text-gray-300">
-              <p>
-                1. Add a trigger and URL above (e.g., &quot;g&quot; and
-                &quot;https://google.com/search?q={"{{{s}}}"}&quot;)
-              </p>
-              <p>
-                2. When you type &quot;g cats&quot; in your browser&apos;s
-                address bar, it redirects to
-                &quot;https://google.com/search?q=cats&quot;
-              </p>
-              <p>
-                3. The {"{{{s}}}"} placeholder gets replaced with whatever you
-                type after the trigger
-              </p>
-            </div>
-          </div>
-        </div>
+        </form>
       </dialog>
     </>
   );
