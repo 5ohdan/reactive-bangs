@@ -25,7 +25,7 @@ export function SearchForm() {
 
   return (
     <form
-      className="animated-search-container m-2 w-full"
+      className="animated-search-container m-2 w-full pt-4"
       onSubmit={handleSubmit}
     >
       <label htmlFor="search">Search</label>
