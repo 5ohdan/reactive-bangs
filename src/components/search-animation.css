@@ -27,8 +27,11 @@
   appearance: none;
   color: var(--fg);
   margin: auto;
+  border: none; /* For Firefox and Safari */
+  padding: 0; /* For Safari */
 }
 
+/* Chrome/Safari cancel button styling */
 input[type="search"]::-webkit-search-cancel-button {
   -webkit-appearance: none;
   width: 16px;
@@ -36,6 +39,17 @@ input[type="search"]::-webkit-search-cancel-button {
   background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><line x1="4" y1="4" x2="16" y2="16" stroke="red" stroke-width="2"/><line x1="16" y1="4" x2="4" y2="16" stroke="red" stroke-width="2"/></svg>')
     no-repeat center;
   background-size: contain;
+  cursor: pointer; /* For Safari */
+}
+
+/* Firefox cancel button styling */
+input[type="search"]::-moz-search-cancel-button {
+  width: 16px;
+  height: 16px;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><line x1="4" y1="4" x2="16" y2="16" stroke="red" stroke-width="2"/><line x1="16" y1="4" x2="4" y2="16" stroke="red" stroke-width="2"/></svg>')
+    no-repeat center;
+  background-size: contain;
+  -moz-appearance: none;
 }
 
 .animated-search-container input:focus,
@@ -67,6 +81,11 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .animated-search-container input::-webkit-search-decoration {
   -webkit-appearance: none;
+}
+
+/* Firefox search decoration removal */
+.animated-search-container input::-moz-search-decoration {
+  -moz-appearance: none;
 }
 
 .animated-search-container label {
@@ -155,4 +174,32 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .animated-search-container input:focus-visible {
   outline: none;
+}
+
+/* Safari specific fixes */
+@media not all and (min-resolution: 0.001dpcm) {
+  @supports (-webkit-appearance: none) {
+    .animated-search-container input {
+      padding: 0;
+      -webkit-border-radius: 50%;
+    }
+
+    .animated-search-container input:focus,
+    .animated-search-container input:valid {
+      -webkit-border-radius: 0.25em;
+      padding: 0.75em 1em;
+    }
+  }
+}
+
+/* Firefox specific fixes */
+@-moz-document url-prefix() {
+  .animated-search-container input {
+    border-width: 0;
+  }
+
+  .animated-search-container input:focus,
+  .animated-search-container input:valid {
+    box-shadow: none;
+  }
 }
