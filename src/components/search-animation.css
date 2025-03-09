@@ -35,13 +35,12 @@ input[type="search"]::-webkit-search-cancel-button {
   height: 16px;
   background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><line x1="4" y1="4" x2="16" y2="16" stroke="red" stroke-width="2"/><line x1="16" y1="4" x2="4" y2="16" stroke="red" stroke-width="2"/></svg>')
     no-repeat center;
-  background-size: contain; /* Ensure the icon scales properly */
+  background-size: contain;
 }
 
 .animated-search-container input:focus,
 .animated-search-container input:valid {
   background-color: var(--input);
-  /* opacity: 0.5; */
   color: var(--primary);
   border-radius: 0.25em;
   box-shadow: none;
@@ -59,11 +58,11 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .animated-search-container input:focus + .caret,
 .animated-search-container input:valid + .caret {
-  animation: handleToCaret var(--dur) linear;
-  background: var(--primary);
-  width: 1px;
-  height: 1.5em;
-  transform: translate(0, -1em) rotate(-180deg) translate(7.5em, -0.25em);
+  animation: handleToCaret var(--dur) linear forwards;
+  background: transparent;
+  width: 0.25em;
+  height: 1em;
+  opacity: 0;
 }
 
 .animated-search-container input::-webkit-search-decoration {
@@ -87,6 +86,7 @@ input[type="search"]::-webkit-search-cancel-button {
   transform: translate(0.75em, -0.25em) rotate(-45deg);
   transform-origin: 50% 0;
   margin: auto;
+  pointer-events: none;
 }
 
 /* Dark mode */
@@ -115,47 +115,44 @@ input[type="search"]::-webkit-search-cancel-button {
     width: 0.25em;
     height: 1em;
     transform: translate(0, -1em) rotate(-45deg) translate(0, 0.875em);
+    opacity: 1;
   }
   25% {
     background: currentColor;
     width: 0.25em;
     height: 1em;
     transform: translate(0, -1em) rotate(-180deg) translate(0, 0.875em);
+    opacity: 1;
+  }
+  30% {
+    opacity: 0;
+    width: 0.25em;
+    height: 1em;
   }
   50%,
   62.5% {
-    background: var(--primary);
-    width: 1px;
-    height: 1.5em;
-    transform: translate(0, -1em) rotate(-180deg) translate(7.5em, 2.5em);
+    background: transparent;
+    width: 0.25em;
+    height: 1em;
+    opacity: 0;
   }
+  70%,
   75%,
+  87.5%,
   99% {
-    background: var(--primary);
-    width: 1px;
-    height: 1.5em;
-    transform: translate(0, -1em) rotate(-180deg) translate(7.5em, -0.25em);
-  }
-  87.5% {
-    background: var(--primary);
-    width: 1px;
-    height: 1.5em;
-    transform: translate(0, -1em) rotate(-180deg) translate(7.5em, 0.125em);
+    background: transparent;
+    width: 0.25em;
+    height: 1em;
+    opacity: 0;
   }
   to {
     background: transparent;
-    width: 1px;
-    height: 1.5em;
-    transform: translate(0, -1em) rotate(-180deg) translate(7.5em, -0.25em);
+    width: 0.25em;
+    height: 1em;
+    opacity: 0;
   }
 }
 
-/* Tailwind compatibility adjustments */
 .animated-search-container input:focus-visible {
   outline: none;
-}
-
-/* Theme adjustments to match your app */
-.animated-search-container {
-  --primary: #f0fdfa; /* Teal color to match your app theme */
 }
