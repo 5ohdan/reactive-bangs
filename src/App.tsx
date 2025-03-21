@@ -46,7 +46,7 @@ function App() {
 
   if (!query || !cleanQuery) {
     return (
-      <main className="flex h-svh items-end justify-center bg-neutral-950/90 transition-colors duration-200">
+      <main className="flex h-dvh items-end justify-center bg-neutral-950/90 transition-colors duration-200">
         <div className="relative mr-0 flex h-[calc(100vh-16px)] w-full flex-col items-center justify-center rounded-xl border-2 border-r-0 border-teal-950/90 bg-gradient-to-br from-neutral-950/90 to-neutral-800/90 transition-colors duration-200 md:ml-4 md:border-b-0">
           <CustomBangs checkBangExists={checkBangExists} />
           <h1 className="line text-6xl font-semibold text-teal-50 font-stretch-condensed">
