@@ -100,12 +100,44 @@ export function CustomBangs({
 
   return (
     <>
-      <div className="fixed top-4 right-4 z-50">
+      <div className="fixed top-4 right-2 z-20 h-14 w-36">
+        <div className="group pointer-events-none absolute z-10 h-32 w-full origin-top transition-all">
+          <svg
+            className="absolute -right-7 h-12 origin-top-left skew-x-[20deg] overflow-hidden"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlnsXlink="http://www.w3.org/1999/xlink"
+            viewBox="0 0 128 32"
+            xmlSpace="preserve"
+          >
+            <line
+              className="stroke-teal-950/90 stroke-2"
+              shapeRendering="optimizeQuality"
+              vectorEffect="non-scaling-stroke"
+              strokeLinecap="round"
+              strokeMiterlimit="10"
+              x1="1"
+              y1="0"
+              x2="128"
+              y2="0"
+            ></line>
+            <path
+              className="fill-neutral-950/90 stroke-teal-950/90 stroke-3"
+              shapeRendering="optimizeQuality"
+              strokeLinecap="round"
+              strokeMiterlimit="10"
+              vectorEffect="non-scaling-stroke"
+              d="M0,0c5.9,0,10.7,4.8,10.7,10.7v10.7c0,5.9,4.8,10.7,10.7,10.7H128V0"
+            ></path>
+          </svg>
+        </div>
+      </div>
+      <div className="fixed top-4 right-2 z-50">
         <button
-          className="focus:ring-opacity-20 flex h-10 items-center justify-center rounded-md bg-teal-950/90 px-4 font-medium text-teal-100 shadow-sm transition-colors hover:bg-teal-800/90 hover:text-teal-200 focus:ring-2 focus:ring-teal-800 focus:outline-none"
+          className="focus:ring-opacity-20 flex h-10 items-center justify-center rounded-lg rounded-bl-3xl px-3 font-medium text-teal-100 shadow-sm transition-colors hover:bg-teal-950/90 hover:text-teal-100 focus:bg-teal-950/90 focus:ring-2 focus:ring-teal-900/90 focus:outline-none"
           onClick={() => setIsOpen(true)}
         >
-          Custom Shortcuts
+          Custom bangs
         </button>
       </div>
 

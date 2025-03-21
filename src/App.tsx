@@ -46,8 +46,8 @@ function App() {
 
   if (!query || !cleanQuery) {
     return (
-      <>
-        <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-neutral-950 to-neutral-800/70 transition-colors duration-200">
+      <main className="flex h-screen items-center justify-center bg-neutral-950/90 transition-colors duration-200">
+        <div className="relative m-4 mr-0 flex h-[calc(100vh-32px)] w-full flex-col items-center justify-center rounded-xl border-2 border-r-0 border-teal-950/90 bg-gradient-to-br from-neutral-950/90 to-neutral-800/90 p-4 transition-colors duration-200">
           <CustomBangs checkBangExists={checkBangExists} />
           <h1 className="line text-6xl font-semibold text-teal-50 font-stretch-condensed">
             Bang
@@ -65,8 +65,8 @@ function App() {
           <div className="mx-auto w-full max-w-2xl pt-4">
             <SearchForm />
           </div>
-        </main>
-      </>
+        </div>
+      </main>
     );
   }
 
